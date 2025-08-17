@@ -16,6 +16,8 @@ router.post('/addSubCategory/:categoryId',auth(endPointRoles.ADD_CATEGORY),multe
 
 router.delete('/deleteSubCategory/:subCategoryId/:categoryId',auth(endPointRoles.ADD_CATEGORY),asyncHandler(SubCategoryController.deleteSubCategory));
 router.get('/getAllSubCategoriesWithBrands',asyncHandler(SubCategoryController.getAllSubCategoriesWithBrands));
+router.get('/getAllSubCategoriesForSpecificCategory/:categoryId',asyncHandler(SubCategoryController.getAllSubCategoriesForSpecificCategory));
+router.get('/getSubCategoryById/:subCategoryId',asyncHandler(SubCategoryController.getSubCategoryById));
 
 router.put('/updateSubCategory/:subCategoryId',auth(endPointRoles.ADD_CATEGORY),multerMiddleWareHost({extinsions:allowedExtensions.image}).single('image'),asyncHandler(SubCategoryController.updateSubCategory));
 

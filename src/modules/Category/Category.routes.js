@@ -21,5 +21,6 @@ router.put('/updateCategory/:categoryId',auth(endPointRoles.ADD_CATEGORY),multer
 router.delete('/deleteCategory/:categoryId',auth(endPointRoles.ADD_CATEGORY),asyncHandler(CategoryController.deleteCategory))
 
 router.get('/getAllCategories',asyncHandler(CategoryController.getAllCategories));
+router.get('/getCategoryById/:categoryId',asyncHandler(CategoryController.getCategoryById));
 
 export default router;

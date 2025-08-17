@@ -235,3 +235,50 @@ export const updateSubCategory = async (req, res, next) => {
         data: requiredSubCategory
     })
 }
+
+// =============================== get all sub categories for specefic category =================== //
+/*
+    // 1 - get the required category id from the params
+    // 2 - get all sub categories
+    // 3 - check if the sub categories found or not
+    // 4 - return the response
+*/
+
+export const getAllSubCategoriesForSpecificCategory = async (req,res,next) =>{
+    // 1 - get the required category id from the params
+    const {categoryId} = req.params;
+    // 2 - get all sub categories
+    const allSubCategories = await subCategroyModel.find({categoryId})
+    // 3 - check if the sub categories found or not
+    if(!allSubCategories.length){
+        return next({message:'No SubCategories Found Related To This Category',cause:404});
+    }
+    // 4 - return the response
+    return res.status(200).json({
+        success:true,
+        message:'SubCategories Fetched Successfully',
+        data:allSubCategories
+    });
+}
+
+// ===================================== get sub category by id ========================== //
+/*
+    // 1 - get the sub category id from the params
+    // 2 - get the required sub category
+    // 3 - return the response
+*/
+export const getSubCategoryById = async (req,res,next) => {
+    // 1 - get the sub category id from the params
+    const {subCategoryId} = req.params;
+    // 2 - get the required sub category
+    const subCategory = await subCategroyModel.findById(subCategoryId);
+    if(!subCategory){
+        return next({message:'SubCategory Not Found',cause:404})
+    }
+    // 3 - return the response
+    return res.status(200).json({
+        success:true,
+        message:'The SubCategory Fetched Successfully',
+        data:subCategory
+    })
+}

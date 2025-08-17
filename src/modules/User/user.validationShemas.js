@@ -16,4 +16,13 @@ export const updateUserSchema = {
     })
 }
 
+// update password schema
+export const updatePassword = {
+    authUser: Joi.object({
+        _id:generalValidationRule.dbId.required()
+    }),
+    body:Joi.object({
+        newPassword:Joi.string().pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>/?\\|\[\]]).{8,}$/)).required()
+    })
+}
 

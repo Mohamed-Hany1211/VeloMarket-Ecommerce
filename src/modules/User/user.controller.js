@@ -1,3 +1,6 @@
+// modules imports
+import bcrypt from 'bcryptjs';
+// files imports
 import User from '../../../DB/models/user.model.js';
 
 // ========================== update user api ========================= //
@@ -127,4 +130,58 @@ export const getUserProfile = async (req,res,next)=>{
         message:`user profile data fetched successfully`,
         data:user
     });
+}
+
+// ================================= delete user profile (soft delete) ======================== //
+/*
+    // 1 - destructing the id of the logged in user
+    // 2 - check if the user exist in DB and if exist we delete his account
+    // 3 - return the response
+*/
+export const userProfileSoftDeletion = async (req,res,next) =>{
+    // 1 - destructing the id of the logged in user
+    const {_id} = req.authUser;
+    // 2 - check if the user exist in DB and if exist we delete his account
+    const user = await User.findByIdAndUpdate(_id,{isAccountDeleted:true});
+    if(!user){
+        return next({message:'User Not Found',cause:404});
+    }
+    // 3 - return the response
+    return res.status(200).json({
+        success:true,
+        message:'The Account Deleted Successfully'
+    })
+}
+
+// ============================= update password ================================ //
+/*
+    // 1 - destructing the id of the logges in user 
+    // 2 - destructing the new password from the body
+    // 3 - check if the user exist in DB and if exist we delete his account
+    // 4 - hashing the new password
+    // 5 - update the user password 
+    // 6 - save the updates 
+    // 7 - return the response
+*/
+export const updatePassword = async (req,res,next) =>{
+    // 1 - destructing the id of the logges in user 
+    const {_id} = req.authUser;
+    // 2 - destructing the new password from the body
+    const {newPassword} = req.body;
+    // 3 - check if the user exist in DB and if exist we delete his account
+    const user = await User.findById(_id);
+    if(!user){
+        return next({message:'User Not Found',cause:404});
+    }
+    // 4 - hashing the new password
+    const hashedPassword = bcrypt.hashSync(newPassword, +process.env.SALT_ROUNDS);
+    // 5 - update the user password 
+    user.password = hashedPassword;
+    // 6 - save the updates 
+    await user.save();
+    // 7 - return the response
+    return res.status(200).json({
+        success:true,
+        message:'Password Updated Successfully'
+    })
 }

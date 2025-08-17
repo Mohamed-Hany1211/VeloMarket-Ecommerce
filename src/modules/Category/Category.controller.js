@@ -227,3 +227,27 @@ export const deleteCategory = async (req, res, next) => {
         data: deletedCategory
     })
 }
+
+
+// ===================================== get category by id ========================== //
+/*
+    // 1 - get the category id from the params
+    // 2 - get the required category
+    // 3 - return the response
+*/
+export const getCategoryById = async (req,res,next) => {
+    // 1 - get the category id from the params
+    const {categoryId} = req.params;
+    // 2 - get the required category
+    const category = await Category.findById(categoryId);
+    if(!category){
+        return next({message:'Category Not Found',cause:404})
+    }
+    // 3 - return the response
+    return res.status(200).json({
+        success:true,
+        message:'The Category Fetched Successfully',
+        data:category
+    })
+}
+

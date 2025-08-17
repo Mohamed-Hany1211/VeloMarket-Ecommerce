@@ -35,7 +35,7 @@ export const addProductToCart = async (req, res, next) => {
         // 4.2 - rollBack the cart documen if any error accour
         req.savedDocuments = { model: Cart, _id: newCart._id };
         // 4.3 - return the response
-        return res.status(201).json({ message: 'Product added to cart successfully', data: newCart });
+        return res.status(201).json({ success:true, message: 'Product added to cart successfully', data: newCart });
     }
     // 5 - if the product exist in the cart then we update the quantity
     const isUpdated = await updateProductQuantity(userCart, productId, quantity);
@@ -68,7 +68,7 @@ export const removeFromCart = async (req, res, next) => {
     const { productId } = req.params;
     // 2 - destructing the id of the loggedIn user
     const { _id } = req.authUser;
-    // 3 - check if the loggedIn user has a cart
+    // 3 - check if the loggedIn user has a cart with the specified product
     const userCart = await Cart.findOne({ userId: _id, 'products.productId': productId });
     if (!userCart) return next({ message: 'Cart not found', cause: 404 });
     // 4 - find the product in the cart and remove it
@@ -84,6 +84,7 @@ export const removeFromCart = async (req, res, next) => {
     // 8 - return the response
     return res.status(200).json({
         success: true,
-        message: 'Product removed from cart successfully'
+        message: 'Product removed from cart successfully',
+        data: newCart
     });
 }

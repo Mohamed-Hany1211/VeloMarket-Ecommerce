@@ -64,6 +64,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         enum:Object.values(userGender),
         default:userGender.NOT_SPECIFIED
+    },
+    isAccountDeleted:{
+        type:Boolean,
+        default:false
     }
 },{timestamps:true});
 

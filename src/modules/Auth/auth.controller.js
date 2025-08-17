@@ -126,7 +126,7 @@ export const signIn = async (req, res, next) => {
     // 1- destructing the required data from the request body
     const { email, password } = req.body;
     // 2 - check if user is exist in database using the email
-    const userFound = await User.findOne({ email, isEmailVerified: true });
+    const userFound = await User.findOne({ email, isEmailVerified: true , isAccountDeleted:false});
     // 2.1 - check if the user is found
     if (!userFound) {
         return next({ message: 'Invalid login credentials or email is not verified', cause: 404 });
@@ -135,7 +135,7 @@ export const signIn = async (req, res, next) => {
     const verifyPass = bcrypt.compareSync(password, userFound.password);
     // 3.1 - check if the password is correct
     if (!verifyPass) {
-        return next({ message: 'Invalid password', cause: 401 });
+        return next({ message: 'Incorrect password', cause: 401 });
     }
     // 4 - create token
     const userToken = jwt.sign({ email, id: userFound._id, loggedIn: true }, process.env.JWT_SECRET_LOGIN, { expiresIn: '1h' });
