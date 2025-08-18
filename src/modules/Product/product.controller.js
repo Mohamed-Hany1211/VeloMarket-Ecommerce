@@ -5,7 +5,7 @@ import Product from '../../../DB/models/product.model.js';
 import Brand from '../../../DB/models/brand.model.js';
 import cloudinaryConnection from '../../utils/cloudinary.js';
 import generateUniqueString from '../../utils/Generate-unique-string.js';
-import { ApiFeatures } from '../../utils/api-features.js';
+import { ApiFeaturesProducts } from '../../utils/ApiFeatures/api-features-products.js';
 
 
 
@@ -217,7 +217,7 @@ export const getAllProducts = async (req, res, next) => {
     // 1 - destructing the page and size from req.query
     const {page ,size,sort,...query} = req.query;
     // 2 - applying the api features to products
-    const features = new ApiFeatures(req.query,Product.find())
+    const features = new ApiFeaturesProducts(req.query,Product.find())
     //.pagination({page ,size})
     // .sort(sort)
     // .search(query);

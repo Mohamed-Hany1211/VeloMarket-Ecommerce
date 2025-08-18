@@ -6,7 +6,7 @@ import Category from '../../../DB/models/category.model.js';
 import generateUniqueString from '../../utils/Generate-unique-string.js';
 import cloudinaryConnection from '../../utils/cloudinary.js';
 import Brand from '../../../DB/models/brand.model.js';
-
+import {ApiFeatures} from '../../utils/ApiFeatures/api-features.js';
 
 // ========================= Add SubCategory ===================== //
 /*
@@ -282,3 +282,31 @@ export const getSubCategoryById = async (req,res,next) => {
         data:subCategory
     })
 }
+
+
+
+// =================== get all sub categories with Api features ====================== //
+/*
+    1 - destructing the page and size from req.query
+    2 - applying the api features to sub categories
+    3 - return the response
+*/
+export const getAllSubCategoriesWithApiFeatures = async (req, res, next) => {
+    // 1 - destructing the page and size from req.query
+    const {page ,size,sort,...query} = req.query;
+    // 2 - applying the api features to sub categories
+    const features = new ApiFeatures(req.query,subCategroyModel.find())
+    .pagination({page ,size})
+    .sort(sort)
+    .search(query)
+    .filter(query)
+    const subCategories = await features.mongooseQuery;
+    if(!subCategories) return next({message:'An Error Occour While Fetching The subCategories',cause:500});
+    // 3 - return the response
+    return res.status(200).json({
+        success: true,
+        message: 'subCategories Fetched Successfully',
+        data:subCategories
+    })
+}
+

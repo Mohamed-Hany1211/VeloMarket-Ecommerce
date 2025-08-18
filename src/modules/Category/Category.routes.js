@@ -22,5 +22,7 @@ router.delete('/deleteCategory/:categoryId',auth(endPointRoles.ADD_CATEGORY),asy
 
 router.get('/getAllCategories',asyncHandler(CategoryController.getAllCategories));
 router.get('/getCategoryById/:categoryId',asyncHandler(CategoryController.getCategoryById));
+router.get('/getAllCategoriesWithApiFeatures',asyncHandler(CategoryController.getAllCategoriesWithApiFeatures));
+router.get('/getAllCategoriesWithBrands',asyncHandler(CategoryController.getAllCategoriesWithBrands));
 
 export default router;

@@ -6,6 +6,7 @@ import Category from "../../../DB/models/category.model.js";
 import subCategroyModel from "../../../DB/models/sub-category.model.js";
 import cloudinaryConnection from '../../utils/cloudinary.js';
 import generateUniqueString from '../../utils/Generate-unique-string.js';
+import {ApiFeatures} from '../../utils/ApiFeatures/api-features.js';
 // =========================== add brand ====================== //
 
 /*
@@ -241,3 +242,27 @@ export const getAllBrands = async (req,res,next)=>{
     })
 }
 
+// =================== get all brands with Api features ====================== //
+/*
+    1 - destructing the page and size from req.query
+    2 - applying the api features to brands
+    3 - return the response
+*/
+export const getAllBrandsWithApiFeatures = async (req, res, next) => {
+    // 1 - destructing the page and size from req.query
+    const { page, size, sort, ...query } = req.query;
+    // 2 - applying the api features to brands
+    const features = new ApiFeatures(req.query, Brand.find())
+        .pagination({page ,size})
+        .sort(sort)
+        .search(query)
+        .filter(query)
+    const Brands = await features.mongooseQuery;
+    if (!Brands) return next({ message: 'An Error Occour While Fetching The Brands', cause: 500 });
+    // 3 - return the response
+    return res.status(200).json({
+        success: true,
+        message: 'Brands Fetched Successfully',
+        data: Brands
+    })
+}

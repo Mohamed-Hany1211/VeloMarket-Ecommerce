@@ -35,4 +35,11 @@ CategroySchema.virtual('SubCategories',{
     foreignField: 'categoryId'
 })
 
+// virtual populate for brands model
+CategroySchema.virtual('Brands',{
+    ref:'Brands',
+    localField: '_id',
+    foreignField: 'categoryId'
+})
+
 export default mongoose.models.Category || mongoose.model('Category', CategroySchema);
