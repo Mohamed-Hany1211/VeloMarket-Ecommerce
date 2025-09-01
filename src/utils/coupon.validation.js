@@ -21,5 +21,8 @@ export const applyCouponValidations = async(couponCode,_id) =>{
     // maxUsage check
     if(isUserAssigned.maxUsage <= isUserAssigned.usageCount) return {message:'you have reached the usage limit for this coupon',status:400};
 
+    // check if the coupon is disabled
+    if(coupon.isCouponDisabled === true ) return {message:'this coupon is disabled',status:400};
+
     return coupon;
 }

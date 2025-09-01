@@ -96,7 +96,7 @@ export const createOrder = async (req, res, next) => {
     // 11 - in case of using any coupon the usage count is increased by one to the user who assigned to that coupon 
     if (coupon) {
         await CouponUsers.updateOne({ couponId: coupon._id, userId: user }, { $inc: { usageCount: 1 } })
-    }
+    } 
     // 12 - return the response
     res.status(201).json({
         success: true,
@@ -105,7 +105,9 @@ export const createOrder = async (req, res, next) => {
     });
 
 }
-
+//  if(DateTime.now() > DateTime.fromISO(order.createdAt)){
+//     order.orderStatus = 'Cancelled';
+// }  
 // ========================= convert from cart to order =========================== //
 /*
     1 - destructing data from body

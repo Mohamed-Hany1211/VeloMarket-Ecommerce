@@ -12,6 +12,9 @@ const router = Router();
 router.post('/addCoupon',auth(endpointsRoles.ADD_COUPON),validationMiddleware(validator.addCouponSchema),expressAsyncHandler(couponController.addCoupon));
 
 router.post('/validateCoupon',auth(endpointsRoles.ADD_COUPON),expressAsyncHandler(couponController.ValidateCoupon));
+router.get('/getCouponById/:copunId',expressAsyncHandler(couponController.getCouponById));
+router.get('/getAllCouponsWithApiFeatures',expressAsyncHandler(couponController.getAllCouponsWithApiFeatures));
+router.patch('/disableAndEnableCoupon/:couponId',auth(endpointsRoles.ADD_COUPON),expressAsyncHandler(couponController.disableAndEnableCoupon));
 
 
 

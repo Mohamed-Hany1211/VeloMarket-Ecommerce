@@ -15,16 +15,19 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": []
+							"mode": "raw",
+							"raw": "{\r\n        \"userName\":\"Hanyoo\",\r\n        \"email\":\"m.serag1905@gmail.com\",\r\n        \"password\":\"Mohamed@1211\",\r\n        \"phoneNumbers\":[\"01010356766\"],\r\n        \"addresses\":[\"Nasr city/Cairo\"],\r\n        \"role\":\"user\",\r\n        \"age\":23,\r\n        \"gender\":\"male\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/signUp",
-							"protocol": "http",
+							"raw": "{{baseURL}}/auth/signUp",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
 								"signUp"
@@ -40,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"ahmed123@gmail.com\",\r\n    \"password\":\"ahmed123\"\r\n}",
+							"raw": "{\r\n    \"email\":\"m.serag1905@gmail.com\",\r\n    \"password\":\"Mohamed@1211\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -48,12 +51,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/auth/signIn",
-							"protocol": "http",
+							"raw": "{{baseURL}}/auth/signIn",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"auth",
 								"signIn"
@@ -74,7 +75,7 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjYxNTI1ZmNkNTFkMjUxYzRiYmM3NGI3IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMzQ2OTUwNiwiZXhwIjoxNzEzNDczMTA2fQ.L5i7SiVso9C5Vyot-WGO2DSpH6dpT2tIBijc8QL9b0Q",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg5ZTFhMTAyODU4NWE3YjFmMzNmYzM4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1NTQ2OTgyNSwiZXhwIjoxNzU1NDczNDI1fQ.OZR5ujAxuV8us0b0NTjV51PukAEUsiPPSoiKY1kEL0w",
 								"type": "text"
 							}
 						],
@@ -83,23 +84,21 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "random10",
+									"value": "furnature",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/M.hany/Pictures/Saved Pictures/valorant-omen-4k-v9-1920x1080.jpg"
+									"src": "/C:/Users/M.hany/Downloads/furnature category.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/category/addCategory",
-							"protocol": "http",
+							"raw": "{{baseURL}}/category/addCategory",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"category",
 								"addCategory"
@@ -115,7 +114,7 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjVmMzExNjEzNGI1NzI2YzE3MmNiM2JkIiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMTAzNDE5NywiZXhwIjoxNzExMDM3Nzk3fQ.hQ9qYC4Q55aXvl5_y7BsAV2KubUYAkfr4cJhCE__H24",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg3ZjQyYjBhMDExOTE5YTY0MDIzMWE4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1MzkxNTQyMywiZXhwIjoxNzUzOTE5MDIzfQ.zi69Hbm15cVec9AcPFvrAnfYeTJPYSZGF2SboK5Dgcg",
 								"type": "text"
 							}
 						],
@@ -124,32 +123,30 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "updated one peice2",
+									"value": "smart phones",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/M.hany/Pictures/1.jpg"
+									"src": "/C:/Users/M.hany/Downloads/1000_F_175242139_pjyBf2AUoFm3bc1JbYGEDBwmsoxbCOMr.jpg"
 								},
 								{
 									"key": "oldPublicId",
-									"value": "E-commerce/Categories/t0ho0ug/nylruswm1yj9vg0nvbfr",
+									"value": "E-commerce/Categories/s74th88/hgga19fs9l3a3ayabvi9",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/category/updateCategory/65f44632558a1310b79fbe40",
-							"protocol": "http",
+							"raw": "{{baseURL}}/category/updateCategory/688a974e0aaaac3cf651b063",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"category",
 								"updateCategory",
-								"65f44632558a1310b79fbe40"
+								"688a974e0aaaac3cf651b063"
 							]
 						}
 					},
@@ -161,12 +158,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category/getAllCategories",
-							"protocol": "http",
+							"raw": "{{baseURL}}/category/getAllCategories",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"category",
 								"getAllCategories"
@@ -182,21 +177,107 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjVmMzExNjEzNGI1NzI2YzE3MmNiM2JkIiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMTMxMDI5NSwiZXhwIjoxNzExMzEzODk1fQ.M8NmDKelW9GHEPzJbkk36EvD3gnHJAXT2w875JiKWX8",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg3ZjQyYjBhMDExOTE5YTY0MDIzMWE4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1MzkxNjgwNiwiZXhwIjoxNzUzOTIwNDA2fQ.7W394gG7h1d65uFr1EkjeU5kV4rgcBYHLDtrGkBj28I",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/category/deleteCategory/6600887e54a7628f85cfde90",
-							"protocol": "http",
+							"raw": "{{baseURL}}/category/deleteCategory/688a974e0aaaac3cf651b063",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"category",
 								"deleteCategory",
-								"6600887e54a7628f85cfde90"
+								"688a974e0aaaac3cf651b063"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get Category By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/category/getCategoryById/68a258a7ac0d3165da631be6",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"category",
+								"getCategoryById",
+								"68a258a7ac0d3165da631be6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCategoriesWithApiFeatures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/category/getAllCategoriesWithApiFeatures?name=furnature",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"category",
+								"getAllCategoriesWithApiFeatures"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "createdAt desc",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "furnature",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "furnature"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCategoriesWithBrands",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/category/getAllCategoriesWithBrands",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"category",
+								"getAllCategoriesWithBrands"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -214,7 +295,7 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjYxNTI1ZmNkNTFkMjUxYzRiYmM3NGI3IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMzM3MzkxNSwiZXhwIjoxNzEzMzc3NTE1fQ.vFwZUtpSzqwNYmscVo8C-MJdpYkgN0tB_bX50v_r_BM",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg5ZTFhMTAyODU4NWE3YjFmMzNmYzM4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1NTQ3MTAwOCwiZXhwIjoxNzU1NDc0NjA4fQ.eW93uN-ge16OBzDlG8eeAX7vAvYLCRT-J9yHOzJAEBY",
 								"type": "text"
 							}
 						],
@@ -223,27 +304,25 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "tokyo",
+									"value": "modern furnature ",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/M.hany/Pictures/Saved Pictures/tokyo ghol.jpg"
+									"src": "/C:/Users/M.hany/Downloads/modern furnature subCategory.jpg"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/SubCategory/addSubCategory/6618ec4bc001286a8dd19d9f",
-							"protocol": "http",
+							"raw": "{{baseURL}}/SubCategory/addSubCategory/68a258a7ac0d3165da631be6",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"SubCategory",
 								"addSubCategory",
-								"6618ec4bc001286a8dd19d9f"
+								"68a258a7ac0d3165da631be6"
 							]
 						}
 					},
@@ -256,22 +335,20 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjYxNTI1ZmNkNTFkMjUxYzRiYmM3NGI3IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMzM2NzgwOCwiZXhwIjoxNzEzMzcxNDA4fQ.7VdqkAzho7oFdKXLtsoMKGhMv7a2FC5tVUy_scpym10",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg3ZjQyYjBhMDExOTE5YTY0MDIzMWE4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1NDc0ODc2NywiZXhwIjoxNzU0NzUyMzY3fQ.Mk_KzgEVTOuvj-eh9NupIsxTGrZeIC_5ZYzAmZQPIXk",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/SubCategory/deleteSubCategory/6618ecbfc001286a8dd19da4/6618ec4bc001286a8dd19d9f",
-							"protocol": "http",
+							"raw": "{{baseURL}}/SubCategory/deleteSubCategory/688ad05d8c2cf0ea6c5322cc/688ad0038c2cf0ea6c5322c7",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"SubCategory",
 								"deleteSubCategory",
-								"6618ecbfc001286a8dd19da4",
-								"6618ec4bc001286a8dd19d9f"
+								"688ad05d8c2cf0ea6c5322cc",
+								"688ad0038c2cf0ea6c5322c7"
 							]
 						}
 					},
@@ -283,12 +360,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/SubCategory/getAllSubCategoriesWithBrands",
-							"protocol": "http",
+							"raw": "{{baseURL}}/SubCategory/getAllSubCategoriesWithBrands",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"SubCategory",
 								"getAllSubCategoriesWithBrands"
@@ -304,7 +379,7 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjYxNTI1ZmNkNTFkMjUxYzRiYmM3NGI3IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMzYyODc0NywiZXhwIjoxNzEzNjMyMzQ3fQ.K8GJ-5IM1VUk3wt33mseCbEMEOBagNRMGZgFqs1oogM",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg3ZjQyYjBhMDExOTE5YTY0MDIzMWE4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1NDc0Nzg2MSwiZXhwIjoxNzU0NzUxNDYxfQ.MLrPGUj-wzAsVqfa-7hfl7YbtVVUV8aUE8XhcJZGfAE",
 								"type": "text"
 							}
 						],
@@ -313,32 +388,125 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "not joker2",
+									"value": "touch screen",
 									"type": "text"
 								},
 								{
 									"key": "oldPublicId",
-									"value": "E-commerce/Categories/kwhuh1o/SubCategories/kq7qoke/fudubjscc3bc0nsgw7zz",
+									"value": "E-commerce/Categories/ttwa3l8/SubCategories/lf3t1sq/mpe4hahrizqrna6mtth6",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/M.hany/Pictures/Saved Pictures/tokyo ghol.jpg"
+									"src": "/C:/Users/M.hany/Downloads/subCategory smart phone.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/SubCategory/updateSubCategory/662002f6e15854cd39f032cd",
-							"protocol": "http",
+							"raw": "{{baseURL}}/SubCategory/updateSubCategory/688ad05d8c2cf0ea6c5322cc",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"SubCategory",
 								"updateSubCategory",
-								"662002f6e15854cd39f032cd"
+								"688ad05d8c2cf0ea6c5322cc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get All Sub Categories For Specific Category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accesstoken",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg3ZjQyYjBhMDExOTE5YTY0MDIzMWE4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1MzkyNzY0NCwiZXhwIjoxNzUzOTMxMjQ0fQ.097UyYdn5ZoSzlBgIo4fdK3azAOjgXPINTX7-ZFdtb0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "touch screen phone",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/M.hany/Downloads/s24 ultra.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/SubCategory/getAllSubCategoriesForSpecificCategory/68a258a7ac0d3165da631be6",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"SubCategory",
+								"getAllSubCategoriesForSpecificCategory",
+								"68a258a7ac0d3165da631be6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get sub category by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/SubCategory/getSubCategoryById/6898cf293605e51cdec8c86b",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"SubCategory",
+								"getSubCategoryById",
+								"6898cf293605e51cdec8c86b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllSubCategoriesWithApiFeatures",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/SubCategory/getAllSubCategoriesWithApiFeatures?page=1&size=2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"SubCategory",
+								"getAllSubCategoriesWithApiFeatures"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "sort",
+									"value": "createdAt desc",
+									"disabled": true
+								}
 							]
 						}
 					},
@@ -376,12 +544,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/brand/addBrand?categoryId=6618ec4bc001286a8dd19d9f&subCategoryId=662004452808b4cd0530b0d2",
-							"protocol": "http",
+							"raw": "{{baseURL}}/brand/addBrand?categoryId=6618ec4bc001286a8dd19d9f&subCategoryId=662004452808b4cd0530b0d2",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"brand",
 								"addBrand"
@@ -412,12 +578,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/brand/deleteBrand/66153038d241e3eef2a154fa",
-							"protocol": "http",
+							"raw": "{{baseURL}}/brand/deleteBrand/66153038d241e3eef2a154fa",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"brand",
 								"deleteBrand",
@@ -433,12 +597,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/brand/getAllBrands",
-							"protocol": "http",
+							"raw": "{{baseURL}}/brand/getAllBrands",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"brand",
 								"getAllBrands"
@@ -479,12 +641,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/brand/updateBrand?brandId=662003c1e15854cd39f032e1",
-							"protocol": "http",
+							"raw": "{{baseURL}}/brand/updateBrand?brandId=662003c1e15854cd39f032e1",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"brand",
 								"updateBrand"
@@ -508,6 +668,14 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "getAllBrandsWithApiFeatures",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
 				}
 			]
 		},
@@ -521,13 +689,13 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjVmMzExNjEzNGI1NzI2YzE3MmNiM2JkIiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMTcyNzc1OCwiZXhwIjoxNzExNzMxMzU4fQ.J7xJAwV9sSksgMPVDw576FXSAVe-dw4SImscLqv6_hc",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg3ZjQyYjBhMDExOTE5YTY0MDIzMWE4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1MzE3Mjc3OSwiZXhwIjoxNzUzMTc2Mzc5fQ.R-N5IBy8Nf-qZ9bqsc9PknanfTfpkQp5Q3KRBvA8N5s",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"newUserName\":\"hany\",\r\n    \"newPhoneNumbers\":[\"010103569668\",\"0503324\"],\r\n    \"newAddresses\":\"giza\",\r\n    \"newAge\":21\r\n}",
+							"raw": "{\r\n    \"newUserName\":\"hanyoo\",\r\n    \"newPhoneNumbers\":[\"010103569668\",\"0503324\"],\r\n    \"newAddresses\":[\"giza\"],\r\n    \"newAge\":21\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -535,12 +703,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/user/updateUser",
-							"protocol": "http",
+							"raw": "{{baseURL}}/user/updateUser",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"user",
 								"updateUser"
@@ -556,17 +722,15 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjYxNTIzMDAwMmZiOTRhZjM3NTQxNDM4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMjY2MTQ2NiwiZXhwIjoxNzEyNjY1MDY2fQ.X_5jiPOwhDDGfr2BqW5nGfUsmwwlLmY-1FvO9A5R2yo",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkdhYm9vb0BnbWFpbC5jb20iLCJpZCI6IjY4ODMwYzYyMmI4MzAzM2IwNDEyM2NkYiIsImxvZ2dlZEluIjp0cnVlLCJpYXQiOjE3NTM0MTg5MTYsImV4cCI6MTc1MzQyMjUxNn0.36TJnRfLmfLrugaM_BM5lhvtbq0fJ9StUEgCM2eG2w8",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/user/deleteUserProfile",
-							"protocol": "http",
+							"raw": "{{baseURL}}/user/deleteUserProfile",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"user",
 								"deleteUserProfile"
@@ -582,20 +746,75 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjYxNTI1ZmNkNTFkMjUxYzRiYmM3NGI3IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTcxMjY2MjA0OSwiZXhwIjoxNzEyNjY1NjQ5fQ.9ePREkumPgNBZu4nbTfeqPxFHoPpqlmF-ke04uWk1JY",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg3ZjQyYjBhMDExOTE5YTY0MDIzMWE4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1MzQwOTQxOCwiZXhwIjoxNzUzNDEzMDE4fQ.ySXR2c3ZI9ZHUU6wMp8mx3SUCq4CNkexiF2R5Cd9LTs",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/user/getUserProfile",
-							"protocol": "http",
+							"raw": "{{baseURL}}/user/getUserProfile",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"user",
 								"getUserProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile Soft Deletion",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accesstoken",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg5ZTFhMTAyODU4NWE3YjFmMzNmYzM4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1NTE5MTg3OCwiZXhwIjoxNzU1MTk1NDc4fQ.9FxMnfoEktxdxwxLD0BR0DHq9QYznvJ8JcKt46NPIAc",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/user/userProfileSoftDeletion",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"userProfileSoftDeletion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Password",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accesstoken",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg5ZTFhMTAyODU4NWE3YjFmMzNmYzM4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1NTE5NTAyOSwiZXhwIjoxNzU1MTk4NjI5fQ.iVWAKaE7qplwRf9yeIv6AUVSjJMJh6bTMyFDgTDXboM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"newPassword\":\"Mohamed@1211\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/updatePassword",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"updatePassword"
 							]
 						}
 					},
@@ -657,12 +876,10 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/product/addProduct?categoryId=6618ec4bc001286a8dd19d9f&subCategoryId=662002f6e15854cd39f032cd&brandId=6620034fe15854cd39f032d4",
-							"protocol": "http",
+							"raw": "{{baseURL}}/product/addProduct?categoryId=6618ec4bc001286a8dd19d9f&subCategoryId=662002f6e15854cd39f032cd&brandId=6620034fe15854cd39f032d4",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"product",
 								"addProduct"
@@ -691,12 +908,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/product/getAllProducts?discount[gt]=0",
-							"protocol": "http",
+							"raw": "{{baseURL}}/product/getAllProducts?discount[gt]=0",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"product",
 								"getAllProducts"
@@ -740,6 +955,52 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accesstoken",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im0uc2VyYWcxOTA1QGdtYWlsLmNvbSIsImlkIjoiNjg3ZjQyYjBhMDExOTE5YTY0MDIzMWE4IiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTc1NTAxOTc2MiwiZXhwIjoxNzU1MDIzMzYyfQ.TPtxYgZoHOrzxQ6X-6AUyg2Del3fIVOuI2FUWt2rW6o",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "samnsung s24 ultra",
+									"type": "text"
+								},
+								{
+									"key": "oldPublicId",
+									"value": "E-commerce/Categories/ttwa3l8/SubCategories/iukr63t/Brands/e4ay6qt/Products/r3t6l9h/uybknnicyw2kxrzrvbdw",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/M.hany/Downloads/s24 ultra.jpeg",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/product/689a558a9f463583cdc38cb0",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"product",
+								"689a558a9f463583cdc38cb0"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -753,13 +1014,13 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFobWVkMTIzQGdtYWlsLmNvbSIsImlkIjoiNjYxN2NiYTE3YTkyOTY2MTA0YWQ2YzUwIiwibG9nZ2VkSW4iOnRydWUsImlhdCI6MTczODI3ODc0MiwiZXhwIjoxNzM4MjgyMzQyfQ.kT0pBYX2OaDTUWCKCnFXgkcIyOpf4A7j_jPjQjw1xLM",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhYm9AZ21haWwuY29tIiwiaWQiOiI2ODk4YzJiZjBiZTUyM2U1YjUxODU5ZGIiLCJsb2dnZWRJbiI6dHJ1ZSwiaWF0IjoxNzU1MDkwMzExLCJleHAiOjE3NTUwOTM5MTF9.CADuN5q-RRK2Zy0WckiN-gkZ4wGQsq4dpjm-rRi_AKk",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"productId\":\"66282c466a0ae2ee8cb87fae\",\r\n    \"quantity\":2\r\n}",
+							"raw": "{\r\n    \"productId\":\"689a558a9f463583cdc38cb0\",\r\n    \"quantity\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -767,12 +1028,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/cart/addProductToCart",
-							"protocol": "http",
+							"raw": "{{baseURL}}/cart/addProductToCart",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"cart",
 								"addProductToCart"
@@ -788,7 +1047,7 @@
 						"header": [
 							{
 								"key": "accesstoken",
-								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhYm8xMjNAZ21haWwuY29tIiwiaWQiOiI2NjE3Y2JkYzdhOTI5NjYxMDRhZDZjNTMiLCJsb2dnZWRJbiI6dHJ1ZSwiaWF0IjoxNzI3NjIyMjYzLCJleHAiOjE3Mjc2MjU4NjN9.OQhdcCIn5Z3kFZ6e883MDvrZagxf6Hg4VV2YoETpCEk",
+								"value": "accessToken_eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdhYm9AZ21haWwuY29tIiwiaWQiOiI2ODk4YzJiZjBiZTUyM2U1YjUxODU5ZGIiLCJsb2dnZWRJbiI6dHJ1ZSwiaWF0IjoxNzU1MDkwOTc5LCJleHAiOjE3NTUwOTQ1Nzl9.JAE_3t5ZmahnsB2Hl6ZHdP583VvzUT0Fr39boWmQmC4",
 								"type": "text"
 							}
 						],
@@ -802,16 +1061,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/cart/removeFromCart/66282c466a0ae2ee8cb87fae",
-							"protocol": "http",
+							"raw": "{{baseURL}}/cart/removeFromCart/689a558a9f463583cdc38cb0",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"cart",
 								"removeFromCart",
-								"66282c466a0ae2ee8cb87fae"
+								"689a558a9f463583cdc38cb0"
 							]
 						}
 					},
@@ -843,12 +1100,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/coupon/addCoupon",
-							"protocol": "http",
+							"raw": "{{baseURL}}/coupon/addCoupon",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"coupon",
 								"addCoupon"
@@ -878,12 +1133,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/coupon/validateCoupon",
-							"protocol": "http",
+							"raw": "{{baseURL}}/coupon/validateCoupon",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"coupon",
 								"validateCoupon"
@@ -912,12 +1165,10 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/order/stripePay/679b065bf12d6a9c562bae77",
-									"protocol": "http",
+									"raw": "{{baseURL}}/order/stripePay/679b065bf12d6a9c562bae77",
 									"host": [
-										"localhost"
+										"{{baseURL}}"
 									],
-									"port": "3000",
 									"path": [
 										"order",
 										"stripePay",
@@ -939,12 +1190,10 @@
 									}
 								],
 								"url": {
-									"raw": "http://localhost:3000/order/refundOrder/679b065bf12d6a9c562bae77",
-									"protocol": "http",
+									"raw": "{{baseURL}}/order/refundOrder/679b065bf12d6a9c562bae77",
 									"host": [
-										"localhost"
+										"{{baseURL}}"
 									],
-									"port": "3000",
 									"path": [
 										"order",
 										"refundOrder",
@@ -977,12 +1226,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/order/createOrder",
-							"protocol": "http",
+							"raw": "{{baseURL}}/order/createOrder",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"order",
 								"createOrder"
@@ -1012,12 +1259,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/order/convertFromCartToOrder",
-							"protocol": "http",
+							"raw": "{{baseURL}}/order/convertFromCartToOrder",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"order",
 								"convertFromCartToOrder"
@@ -1038,12 +1283,10 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/order/deliverOrder/679afe377e361eac79a52578",
-							"protocol": "http",
+							"raw": "{{baseURL}}/order/deliverOrder/679afe377e361eac79a52578",
 							"host": [
-								"localhost"
+								"{{baseURL}}"
 							],
-							"port": "3000",
 							"path": [
 								"order",
 								"deliverOrder",
@@ -1054,6 +1297,13 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000",
+			"type": "default"
 		}
 	]
 }
