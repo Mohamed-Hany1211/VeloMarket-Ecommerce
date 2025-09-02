@@ -39,6 +39,10 @@ const couponSchema = new mongoose.Schema({
         ref:'User',
         required:true
     },
+    updatedBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     isCouponDisabled:{
         type:Boolean,
         default:false

@@ -4,6 +4,7 @@ import CouponUsers from '../../../DB/models/coupon-users.model.js';
 import User from '../../../DB/models/user.model.js';
 import { applyCouponValidations } from '../../utils/coupon.validation.js';
 import { ApiFeatures } from '../../utils/ApiFeatures/api-features.js';
+import { DateTime } from 'luxon';
 
 // ===================== add coupon ==================== //
 /*
@@ -166,3 +167,109 @@ export const disableAndEnableCoupon = async (req,res,next) =>{
         data: coupon
     })
 } 
+
+
+// ========================= get all disabled coupons ================== //
+/*
+    // 1 - get all disabled coupons
+    // 2 - check if there is any disabled coupons
+    // 3 - return the response
+*/
+export const getAllDisabledCoupons = async (req,res,next) =>{
+    // 1 - get all disabled coupons
+    const disabledCoupons = await Coupon.find({isCouponDisabled:true});
+    // 2 - check if there is any disabled coupons
+    if(!disabledCoupons.length){
+        return next({message:'No Disabled Coupons Found',cause:404});
+    }
+    // 3 - return the response
+    res.status(200).json({
+        success: true,
+        message: 'Disabled Coupons Fetched Successfully',
+        data: disabledCoupons
+    })
+}
+
+// ========================== Get all enabled coupons ==================== //
+/*
+    // 1 - get all enabled coupons
+    // 2 - check if there is any enabled coupons
+    // 3 - check if there is any enabled coupons
+*/
+export const getAllEnabledCoupons = async (req,res,next) =>{
+    // 1 - get all enabled coupons
+    const enabledCoupons = await Coupon.find({isCouponDisabled:false});
+    // 2 - check if there is any enabled coupons
+    if(!enabledCoupons.length) return next({message:'No Enabled Coupons Found',cause:404});
+    // 3 - check if there is any enabled coupons
+    res.status(200).json({
+        success: true,
+        message: 'Enabled Coupons Fetched Successfully',
+        data: enabledCoupons
+    })
+}
+
+// ====================== update coupon ====================== //
+/*
+    // 1 - destructing the coupon id from the params
+    // 2 - destructing the user id from the authUser
+    // 3 - destructing the coupon from the body
+    // 4 - find the coupon by the id
+    // 5 - check if the coupon is found
+    // 6 - check if the coupon code is diffrent from the old one
+    // 7 - check if the coupon amount is diffrent from the old one
+    // 8 - check if the coupon is fixed is diffrent from the old one
+    // 9 - check if the coupon is percentage is diffrent from the old one
+*/
+export const updateCoupon = async (req,res,next) =>{
+    // destructing the coupon id from the params
+    const {couponId} = req.params;
+    // destructing the user id from the authUser
+    const {_id} = req.authUser;
+    // destructing the coupon from the body
+    const {couponCode,couponAmount,isFixed,isPercentage,fromDate,toDate} = req.body;
+    // find the coupon by the id
+    const coupon = await Coupon.findOne({_id:couponId,addedBy:_id});
+    // check if the coupon is found
+    if(!coupon) return next({message:'Coupon Not Found',cause:404});
+    // check if the coupon code is diffrent from the old one
+    if(couponCode && couponCode !== coupon.couponCode){
+        coupon.couponCode = couponCode;
+    }else{
+        return next({message:'Coupon Code Is The Same As The Old One',cause:400});
+    } 
+    // check if the coupon amount is diffrent from the old one
+    if(couponAmount && couponAmount !== coupon.couponAmount){
+        coupon.couponAmount = couponAmount;
+    }else{
+        return next({message:'Coupon Amount Is The Same As The Old One',cause:400});
+    }
+    // check if the coupon is fixed is diffrent from the old one
+    if(isFixed){
+        coupon.isFixed = isFixed;
+    }
+    // check if the coupon is percentage is diffrent from the old one
+    if(isPercentage){
+        coupon.isPercentage = isPercentage;
+    }
+    // check if the coupon from date is diffrent from the old one
+    if(fromDate && fromDate !== coupon.fromDate && DateTime.fromISO(fromDate) >= DateTime.now()){
+        coupon.fromDate = fromDate;
+    }else{
+        return next({message:'Coupon From Date Is The Same As The Old One Or Is Greater Than Or Equal To The To Date',cause:400});
+    }
+    // check if the coupon to date is diffrent from the old one
+    if(toDate && toDate !== coupon.toDate && DateTime.fromISO(toDate) > DateTime.fromISO(coupon.fromDate && fromDate)){
+        coupon.toDate = toDate;
+    }else{
+        return next({message:'Coupon To Date Is The Same As The Old One Or is less than or equal to the from date',cause:400});
+    }
+    // save the updated coupon
+    await coupon.save();
+    // return the response
+    res.status(200).json({
+        success: true,
+        message:'Coupon Updated Successfully',
+        data:coupon
+    });
+}

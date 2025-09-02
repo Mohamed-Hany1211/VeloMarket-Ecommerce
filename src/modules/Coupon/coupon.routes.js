@@ -14,7 +14,10 @@ router.post('/addCoupon',auth(endpointsRoles.ADD_COUPON),validationMiddleware(va
 router.post('/validateCoupon',auth(endpointsRoles.ADD_COUPON),expressAsyncHandler(couponController.ValidateCoupon));
 router.get('/getCouponById/:copunId',expressAsyncHandler(couponController.getCouponById));
 router.get('/getAllCouponsWithApiFeatures',expressAsyncHandler(couponController.getAllCouponsWithApiFeatures));
+router.get('/getAllDisabledCoupons',expressAsyncHandler(couponController.getAllDisabledCoupons));
+router.get('/getAllEnabledCoupons',expressAsyncHandler(couponController.getAllEnabledCoupons));
 router.patch('/disableAndEnableCoupon/:couponId',auth(endpointsRoles.ADD_COUPON),expressAsyncHandler(couponController.disableAndEnableCoupon));
+router.put('/updateCoupon/:couponId',auth(endpointsRoles.ADD_COUPON),expressAsyncHandler(couponController.updateCoupon));
 
 
 
