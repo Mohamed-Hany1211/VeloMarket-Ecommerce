@@ -17,8 +17,9 @@ router.post(
     expressAsyncHandler(reviewController.addReview)
 );
 
+router.delete('/deleteReview/:reviewId',auth(reviewApiesRules.ADD_REVIEW),expressAsyncHandler(reviewController.deleteReview));
 
-
+router.get('/getAllReviewsForSpecificProduct',expressAsyncHandler(reviewController.getAllReviewsForSpecificProduct));
 
 
 

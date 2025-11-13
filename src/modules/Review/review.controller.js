@@ -74,3 +74,51 @@ export const addReview = async (req,res,next)=>{
 }
 
 
+// ======================================= Delete Review =================================== //
+/*
+    // 1 - destructing the logged in user id
+    // 2 - destructing the review id from the params
+    // 3 - find the required review and delete it 
+    // 4 - return the response 
+*/
+export const deleteReview = async(req,res,next) =>{
+    // 1 - destructing the logged in user id
+    const {_id} = req.authUser;
+    // 2 - destructing the review id from the params
+    const {reviewId} = req.params;
+    // 3 - find the required review and delete it 
+    const review = await Review.findOneAndDelete({
+        userId:_id,
+        _id:reviewId
+    });
+    if(!review){
+        return next({message:'Failed To Delete The Review',cause:500});
+    }
+    // 4 - return the response 
+    res.status(200).json({
+        success:true,
+        message:'Review Deleted Successfully'
+    })
+}
+
+// ========================= Get all reviews for specific product ================== //
+/*
+    // 1 - destructing the product id
+    // 2 - get all reviews for a specific product
+    // 3 - return the response
+*/
+export const getAllReviewsForSpecificProduct = async (req,res,next) => {
+    // 1 - destructing the product id
+    const {productId} = req.query;
+    // 2 - get all reviews for a specific product
+    const reviews = await Review.find({productId});
+    if(!reviews.length){
+        return next({message:'No Reviews Found For This Product',cause:404});
+    }
+    // 3 - return the response
+    res.status(200).json({
+        success:true,
+        message:'Reviews Fetched Successfully',
+        data:reviews
+    })
+}
