@@ -14,6 +14,9 @@ router.post('/signUp', validationMiddleware(AuthValidationSchemas.signUpSchema),
 router.get('/verify-email', validationMiddleware(AuthValidationSchemas.verifyEmailSchema), asyncHandler(AuthController.verifyEmail));
 router.post('/signIn', validationMiddleware(AuthValidationSchemas.signInSchema), asyncHandler(AuthController.signIn));
 
+router.post('/forgetPassword',asyncHandler(AuthController.forgetPassword));
+router.post('/resetPassword/:token',asyncHandler(AuthController.resetPassword));
+
 
 
 

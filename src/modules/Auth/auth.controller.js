@@ -1,9 +1,11 @@
 // modules imports
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import { nanoid } from 'nanoid';
 // files imports
 import User from '../../../DB/models/user.model.js';
 import sendEmailService from '../../services/Send-mail.service.js';
+
 
 // ======================= signUp api ========================= //
 
@@ -141,6 +143,7 @@ export const signIn = async (req, res, next) => {
     const userToken = jwt.sign({ email, id: userFound._id, loggedIn: true }, process.env.JWT_SECRET_LOGIN, { expiresIn: '1h' });
     // 5 - create flag for loggedIn User
     userFound.isloggedIn = true;
+    userFound.status = 'online';
     // 6 - save the changes 
     await userFound.save();
     // 7 - return the response
@@ -151,3 +154,79 @@ export const signIn = async (req, res, next) => {
     })
 }
 
+// ============================== forget password ==================== //
+/*
+    // 1 - destructing user email
+    // 2 - check if the user is found
+    // 3 - generate unique and random code
+    // 4 - hashing the generated code 
+    // 5 - generate token to send it with the email
+    // 6 - creating the reset password link
+    // 7 - send the email to the user
+    // 8 - check if the email is sent or not
+    // 9 - update the user data
+    // 10 - return the response
+*/
+export const forgetPassword = async(req,res,next)=>{
+    // 1 - destructing user email
+    const {email} = req.body;
+    // 2 - check if the user is found
+    const user = await User.findOne({email});
+    if(!user){
+        return next({message:'Invalid Email',cause:400});
+    }
+    // 3 - generate unique and random code
+    const code = nanoid();
+    // 4 - hashing the generated code 
+    const hashedCode = bcrypt.hashSync(code,+process.env.SALT_ROUNDS);
+    // 5 - generate token to send it with the email
+    const token = jwt.sign({email,sentCode:hashedCode},process.env.RESET_TOKEN,{expiresIn:'1h'});
+    // 6 - creating the reset password link
+    const resetPasswordLink = `${req.protocol}://${req.headers.host}/auth/reset/${token}`;
+    // 7 - send the email to the user
+    const isEmailSent = sendEmailService({
+        to:email,
+        subject:'Reset Password',
+        message:`<section style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center;">
+        <div style="width: 50%; background-color: rgba(128, 128, 128,0.3); height: 20vh; border-radius: .625rem; text-align: center;">
+            <h2 style=" color: black; text-shadow: 7px 7px 5px  white;display:block;font-size:25px;">Please click the link to verify your account</h2>
+            <a style="text-decoration: none; font-size: 20px; " href='${resetPasswordLink}'>Click To Reset Your Password</a>
+        </div>
+    </section>`
+    })
+    // 8 - check if the email is sent or not
+    if(!isEmailSent){
+        return next({message:'Fail To Send Reset Password Email',cause:400});
+    }
+    // 9 - update the user data
+    const userUpdates = await User.findOneAndUpdate({email},{
+        ResetPasswordOTP:hashedCode
+    },{new:true});
+    // 10 - return the response
+    res.status(200).json({
+        success:true,
+        message:'Reset Mail Sent Successfully',
+        data:userUpdates
+    })
+}
+
+
+// ================================= reset password ==================== //
+/** */
+export const resetPassword = async (req,res,next) =>{
+    const {token} = req.params;
+    const decodedToken = jwt.verify({token},process.env.RESET_TOKEN);
+    const user = await User.findOne({email:decodedToken?.email,ResetPasswordOTP:decodedToken?.sentCode});
+    if(!user){
+        return next({message:'You Already Reset Your Password',cause:400})
+    }
+    const {newPassword} = req.body;
+    user.password = newPassword;
+    user.ResetPasswordOTP = null;
+    const resetedPassword = await user.save();
+    res.status(200).json({
+        success:true,
+        message:'The Password Reset Done Successfully',
+        data:resetedPassword
+    })
+}

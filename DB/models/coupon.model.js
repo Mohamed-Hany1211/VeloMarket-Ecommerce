@@ -41,6 +41,20 @@ const couponSchema = new mongoose.Schema({
     isCouponDisabled:{
         type:Boolean,
         default:false
+    },
+    disabledBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
+    disabledAt:{
+        type:String
+    },
+    enabledBy:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
+    enabledAt:{
+        type:String
     }
 },{timestamps:true})
 

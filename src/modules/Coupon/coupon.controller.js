@@ -147,7 +147,9 @@ export const getAllCouponsWithApiFeatures = async (req, res, next) => {
     // 2 - get the coupon by the id
     // 3 - disable or enable the coupon
     // 4 - save the updated coupon
-    // 5 - return the response
+    // 5 - check if the coupon is disabled or enabled to store the info of this action
+    // 6 - save the updated coupon again
+    // 7 - return the response
 */
 export const disableAndEnableCoupon = async (req,res,next) =>{
     // 1 - destructing the id of the coupon creator
@@ -160,7 +162,21 @@ export const disableAndEnableCoupon = async (req,res,next) =>{
     coupon.isCouponDisabled = !coupon.isCouponDisabled;
     // 4 - save the updated coupon
     await coupon.save();
-    // 5 - return the response
+    // 5 - check if the coupon is disabled or enabled to store the info of this action
+    if(coupon.isCouponDisabled){
+        coupon.disabledBy = _id;
+        coupon.disabledAt = DateTime.now().toISO();
+        coupon.enabledBy = null;
+        coupon.enabledAt = null;
+    }else{
+        coupon.enabledBy = _id;
+        coupon.enabledAt = DateTime.now().toISO();
+        coupon.disabledBy = null;
+        coupon.disabledAt = null;
+    }
+    // 6 - save the updated coupon again
+    await coupon.save();
+    // 7 - return the response
     res.status(200).json({
         success: true,
         message: 'Coupon Disabled/Enabled Successfully',
@@ -223,6 +239,7 @@ export const getAllEnabledCoupons = async (req,res,next) =>{
     // 10 - save the updated coupon
     // 11 - return the response
 */
+
 export const updateCoupon = async (req,res,next) =>{
     // 1 - destructing the coupon id from the params
     const {couponId} = req.params;
