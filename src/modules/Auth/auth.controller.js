@@ -205,28 +205,45 @@ export const forgetPassword = async(req,res,next)=>{
     // 10 - return the response
     res.status(200).json({
         success:true,
-        message:'Reset Mail Sent Successfully',
+        message:'Reset Mail Sent Successfully, Try To Login',
         data:userUpdates
     })
 }
 
 
 // ================================= reset password ==================== //
-/** */
+/*
+    // 1 - destructing the reset token from the params
+    // 2 - decode the token to verify the data
+    // 3 - find the user using the email and the reset otp
+    // 4 - destructing the new password from the body
+    // 5 - hash the new password
+    // 6 - update the user's data
+    // 7 - save the updated data
+    // 8 - return the response
+*/
 export const resetPassword = async (req,res,next) =>{
+    // 1 - destructing the reset token from the params
     const {token} = req.params;
-    const decodedToken = jwt.verify({token},process.env.RESET_TOKEN);
+    // 2 - decode the token to verify the data
+    const decodedToken = jwt.verify(token , process.env.RESET_TOKEN);
+    // 3 - find the user using the email and the reset otp
     const user = await User.findOne({email:decodedToken?.email,ResetPasswordOTP:decodedToken?.sentCode});
     if(!user){
         return next({message:'You Already Reset Your Password',cause:400})
     }
+    // 4 - destructing the new password from the body
     const {newPassword} = req.body;
-    user.password = newPassword;
+    // 5 - hash the new password
+    const newPassHashed = bcrypt.hashSync(newPassword,+process.env.SALT_ROUNDS);
+    // 6 - update the user's data
+    user.password = newPassHashed;
     user.ResetPasswordOTP = null;
-    const resetedPassword = await user.save();
+    // 7 - save the updated data
+    await user.save();
+    // 8 - return the response
     res.status(200).json({
         success:true,
-        message:'The Password Reset Done Successfully',
-        data:resetedPassword
+        message:'The Password Reset Done Successfully'
     })
 }
