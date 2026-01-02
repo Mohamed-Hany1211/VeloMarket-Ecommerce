@@ -48,7 +48,6 @@ const userSchema = new mongoose.Schema({
         type:Boolean,
         default:false
     },
-    token:String,
     ResetPasswordOTP:String,
     mediaFolderId:String,
     profilePicture:{
@@ -68,7 +67,8 @@ const userSchema = new mongoose.Schema({
     isAccountDeleted:{
         type:Boolean,
         default:false
-    }
+    },
+    refreshToken:String
 },{timestamps:true});
 
 

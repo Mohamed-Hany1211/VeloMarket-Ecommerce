@@ -29,6 +29,23 @@ export const signInSchema = {
 
 export const verifyEmailSchema = {
     query: Joi.object({
-        token: Joi.string().required()
+        token: Joi.string().pattern(new RegExp(/^[a-zA-Z0-9_]+$/)).required()
+    })
+}
+
+// reset password schema
+
+export const resetPasswordSchema = {
+    params: Joi.object({
+        token: Joi.string().pattern(new RegExp(/^[a-zA-Z0-9_.]+$/)).required()
+    })
+}
+
+
+// forget password schema 
+
+export const forgetPasswordSchema = {
+    body:Joi.object({
+        email:Joi.string().email().required()
     })
 }
