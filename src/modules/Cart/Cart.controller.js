@@ -32,7 +32,7 @@ export const addProductToCart = async (req, res, next) => {
     if (!userCart) {
         // 4.1 - create a new cart for the loggedIn user
         const newCart = await addCart(_id, product, quantity);
-        // 4.2 - rollBack the cart documen if any error accour
+        // 4.2 - rollBack the cart document if any error occur
         req.savedDocuments = { model: Cart, _id: newCart._id };
         // 4.3 - return the response
         return res.status(201).json({ success:true, message: 'Product added to cart successfully', data: newCart });

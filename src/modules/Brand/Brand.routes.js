@@ -11,13 +11,13 @@ import {validationMiddleware} from '../../middlewares/validation.middleware.js';
 import * as BrandValidationShemas from './Brand.validationSchema.js';
 const router = Router();
 
-router.post('/addBrand',validationMiddleware(BrandValidationShemas.addBrand),auth(endPointRoles.ADD_BRAND),multerMiddleWareHost({
+router.post('/addBrand',auth(endPointRoles.ADD_BRAND),multerMiddleWareHost({
     extinsions:allowedExtensions.image
-}).single('image'),asyncHandler(BrandController.addBrand));
-router.delete('/deleteBrand/:brandId',validationMiddleware(BrandValidationShemas.deleteBrand),auth(endPointRoles.ADD_BRAND),asyncHandler(BrandController.deleteBrand));
+}).single('image'),validationMiddleware(BrandValidationShemas.addBrand),asyncHandler(BrandController.addBrand));
+router.delete('/deleteBrand/:brandId',auth(endPointRoles.ADD_BRAND),validationMiddleware(BrandValidationShemas.deleteBrand),asyncHandler(BrandController.deleteBrand));
 router.get('/getAllBrands',asyncHandler(BrandController.getAllBrands));
-router.get('/getAllBrandsWithApiFeatures',asyncHandler(BrandController.getAllBrandsWithApiFeatures));
-router.put('/updateBrand',validationMiddleware(BrandValidationShemas.updateBrand),auth(endPointRoles.ADD_BRAND),multerMiddleWareHost({
+router.get('/getAllBrandsWithApiFeatures',validationMiddleware(BrandValidationShemas.getAllBrandsWithApiFeatures),asyncHandler(BrandController.getAllBrandsWithApiFeatures));
+router.put('/updateBrand',auth(endPointRoles.ADD_BRAND),multerMiddleWareHost({
     extinsions:allowedExtensions.image
-}).single('image'),asyncHandler(BrandController.updateBrand));
+}).single('image'),validationMiddleware(BrandValidationShemas.updateBrand),asyncHandler(BrandController.updateBrand));
 export default router;

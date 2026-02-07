@@ -252,3 +252,20 @@ export const getAllProductsWithReviews = async (req,res,next) =>{
         data:products
     })
 }
+
+// ======================== delete product api ========================= //
+/** */
+export const deleteProduct = async (req,res,next) =>{
+    // destructing the user id
+    const {_id} = req.authUser;
+    // destructing the id of the product 
+    const {productId} = req.params;
+    // find the product and deleting it
+    const deletedProduct = await Product.findByIdAndDelete(productId);
+    if(!deletedProduct){
+        return next({message:'Product Deletion Fail',cause:400});
+    }
+    await cloudinaryConnection().api.delete_resources_by_prefix(`${process.env.MAIN_FOLDER}/Categories/${RelatedCategory.folderId}/SubCategories/${RelatedSubCategory.folderId}/Brands/${deletedBrand.folderId}`);
+        // 7 - delete the brand's folder from cloudinary
+        await cloudinaryConnection().api.delete_folder(`${process.env.MAIN_FOLDER}/Categories/${RelatedCategory.folderId}/SubCategories/${RelatedSubCategory.folderId}/Brands/${deletedBrand.folderId}`);
+}

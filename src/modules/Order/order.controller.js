@@ -34,7 +34,7 @@ export const createOrder = async (req, res, next) => {
         quantity,
         couponCode,
         paymentMethod,
-        phoneNumbers,
+        phoneNumber,
         address,
         city,
         postalCode,
@@ -82,7 +82,7 @@ export const createOrder = async (req, res, next) => {
         user,
         orderItems,
         shippingAddress: { address, city, postalCode, country },
-        phoneNumbers,
+        phoneNumber,
         shippingPrice,
         totalPrice,
         orderStatus,
@@ -106,9 +106,7 @@ export const createOrder = async (req, res, next) => {
     });
 
 }
-//  if(DateTime.now() > DateTime.fromISO(order.createdAt)){
-//     order.orderStatus = 'Cancelled';
-// }  
+
 // ========================= convert from cart to order =========================== //
 /*
     1 - destructing data from body
@@ -133,7 +131,7 @@ export const convertFromCartToOrder = async (req, res, next) => {
     const {
         couponCode,
         paymentMethod,
-        phoneNumbers,
+        phoneNumber,
         address,
         city,
         postalCode,
@@ -186,7 +184,7 @@ export const convertFromCartToOrder = async (req, res, next) => {
         user,
         orderItems,
         shippingAddress: { address, city, postalCode, country },
-        phoneNumbers,
+        phoneNumber,
         shippingPrice,
         totalPrice,
         orderStatus,

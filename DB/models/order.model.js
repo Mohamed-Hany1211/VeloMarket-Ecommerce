@@ -19,7 +19,7 @@ const orderSchema = new mongoose.Schema({
         postalCode: { type: String, required: true },
         country: { type: String, required: true }
     },
-    phoneNumbers: [{ type: String, required: true }],
+    phoneNumber: { type: String, required: true },
     shippingPrice: { type: Number, required: true }, // products array subtotal
     coupon: { type: mongoose.Schema.Types.ObjectId, ref: 'Coupon' },
     totalPrice: { type: Number, required: true }, // shipping price - coupon if exist

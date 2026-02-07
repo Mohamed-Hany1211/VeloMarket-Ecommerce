@@ -3,6 +3,7 @@ import Joi from "joi"
 // files imports
 import { generalValidationRule } from "../../utils/general.validation.rules.js"
 
+// add coupon validation schema
 export const addCouponSchema = {
     body: Joi.object({
         couponCode: Joi.string().required(),
@@ -18,6 +19,8 @@ export const addCouponSchema = {
     })
 }
 
+
+// update coupon validation schema
 export const updateCouponSchema = {
     body: Joi.object({
         couponCode: Joi.string(),
@@ -28,5 +31,28 @@ export const updateCouponSchema = {
             userId:generalValidationRule.dbId.required(),
             maxUsage: Joi.number().required().min(1)
         }))
+    })
+}
+
+// validate coupon schema 
+export const ValidateCouponSchema = {
+    body:Joi.object({
+        couponCode:Joi.string().required()
+    })
+}
+
+// get coupon by id 
+export const getCouponByIdSchema = {
+    params:Joi.object({
+        couponId:generalValidationRule.dbId.required()
+    })
+}
+
+// get All Coupons With Api Features
+
+export const getAllCouponsWithApiFeaturesSchema = {
+    query:Joi.object({
+        page:Joi.number(),
+        size:Joi.number()
     })
 }

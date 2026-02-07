@@ -103,9 +103,9 @@ export const ValidateCoupon = async (req, res, next) => {
 */
 export const getCouponById = async (req, res, next) => {
     // 1 - destructing the coupon id from the params
-    const { copunId } = req.params;
+    const { couponId } = req.params;
     // 2 - get the coupon 
-    const coupon = await Coupon.findById(copunId);
+    const coupon = await Coupon.findById(couponId);
     if (!coupon) return next({ message: 'Coupon not found', cause: 404 });
     // 3 - return the response
     res.status(200).json({
