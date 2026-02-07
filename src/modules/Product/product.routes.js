@@ -14,7 +14,7 @@ const router = Router();
 
 router.post('/addProduct',auth(endPointsRoles.ADD_PRODUCT),multerMiddleWareHost({extinsions:allowedExtensions.image}).array('image',3),validationMiddleware(validator.addProductSchema),expressAsyncHandler(productController.addProduct));
 
-router.put('/:productId',
+router.put('/updateProduct/:productId',
     auth(endPointsRoles.ADD_PRODUCT),
     multerMiddleWareHost({ extensions: allowedExtensions.image }).single('image'),
     validationMiddleware(validator.updateProductSchema),
@@ -23,5 +23,7 @@ router.put('/:productId',
 
 router.get('/getAllProducts',validationMiddleware(validator.getAllProductsWithApiFeaturesSchema),expressAsyncHandler(productController.getAllProducts));
 router.get('/getAllProductsWithReviews',expressAsyncHandler(productController.getAllProductsWithReviews));
+
+router.delete('/deleteProduct/:productId',auth(endPointsRoles.DELETE_PRODUCT),validationMiddleware(validator.deleteProductSchema),expressAsyncHandler(productController.deleteProduct));
 
 export default router;

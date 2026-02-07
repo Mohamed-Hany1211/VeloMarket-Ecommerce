@@ -48,3 +48,10 @@ export const getAllProductsWithApiFeaturesSchema = {
         size:Joi.number()
     })
 }
+
+// delete product validation schema
+export const deleteProductSchema = {
+    params:Joi.object({
+        productId:generalValidationRule.dbId.required()
+    })
+}

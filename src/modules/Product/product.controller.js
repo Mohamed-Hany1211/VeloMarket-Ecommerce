@@ -3,6 +3,8 @@ import slugify from 'slugify';
 // files imports
 import Product from '../../../DB/models/product.model.js';
 import Brand from '../../../DB/models/brand.model.js';
+import Category from '../../../DB/models/category.model.js';
+import subCategory from '../../../DB/models/sub-category.model.js';
 import cloudinaryConnection from '../../utils/cloudinary.js';
 import generateUniqueString from '../../utils/Generate-unique-string.js';
 import { ApiFeaturesProducts } from '../../utils/ApiFeatures/api-features-products.js';
@@ -40,20 +42,20 @@ export const addProduct = async (req, res, next) => {
     // 4 - brand check
     const brand = await Brand.findById(brandId);
     if (!brand) {
-        return next({message:'Brand Not Found',cause:404});
+        return next({ message: 'Brand Not Found', cause: 404 });
     }
     // 5 - category check
     if (brand.categoryId.toString() !== categoryId) {
-        return next({message:'Brand Not Found In This Category',cause:404});
+        return next({ message: 'Brand Not Found In This Category', cause: 404 });
     }
     // 6 - subCategory check
     if (brand.subCategoryId.toString() !== subCategoryId) {
-        return next({message:'Brand Not Found In This SubCategory',cause:404});
+        return next({ message: 'Brand Not Found In This SubCategory', cause: 404 });
     }
 
     // 7 - who will be authorized to add a product
     if (brand.addedBy.toString() !== addedBy.toString()) {
-        return next({message:'You Are Not Authorized To Add a Product To This Brand',cause:401});
+        return next({ message: 'You Are Not Authorized To Add a Product To This Brand', cause: 401 });
     }
     // 8 - generate the slug of product title
     const slug = slugify(title, { lower: true, replacement: '-' });
@@ -61,7 +63,7 @@ export const addProduct = async (req, res, next) => {
     const appliedPrice = basePrice - (basePrice * (discount || 0) / 100);
     // 10 - images
     if (!req.files?.length) {
-        return next({message:'Please Upload Product Images',cause:400});
+        return next({ message: 'Please Upload Product Images', cause: 400 });
     }
 
     // 11 - prepare the imgaes folder in the host
@@ -69,7 +71,7 @@ export const addProduct = async (req, res, next) => {
     const folderId = generateUniqueString(7);
     const folderPath = brand.img.public_id.split(`${brand.folderId}/`)[0];
     console.log(folderPath);
-    
+
     // 12 - uploading each image of the product to the host
     for (const file of req.files) {
         const { secure_url, public_id } = await cloudinaryConnection().uploader.upload(file.path, {
@@ -147,17 +149,17 @@ export const updateProduct = async (req, res, next) => {
     // 4 - check if the product is in the database
     const product = await Product.findById(productId);
     if (!product) {
-        return next({message:'Product Not Found',cause:404});
+        return next({ message: 'Product Not Found', cause: 404 });
     }
     // 5 - who will be authorized to add a product
     if (product.addedBy.toString() !== addedBy.toString()) {
-        return next({message:'You Are Not Authorized To Update This Product',cause:403});
+        return next({ message: 'You Are Not Authorized To Update This Product', cause: 403 });
     }
     // 6 - if the user want to change the title 
     if (title) {
         // 6.1 - check if the new title is same as the old one
-        if(title === product.title){
-            return next({message:'Enter a Different Title From The Existing One',cause:400});
+        if (title === product.title) {
+            return next({ message: 'Enter a Different Title From The Existing One', cause: 400 });
         }
         // 6.2 - update the title
         product.title = title;
@@ -172,17 +174,17 @@ export const updateProduct = async (req, res, next) => {
     if (stock) product.stock = stock;
 
     // 10 - prices changes
-        // 10.1 - update the applied price 
+    // 10.1 - update the applied price 
     const appliedPrice = (basePrice || product.basePrice) * (1 - ((discount || product.discount) / 100))
     product.appliedPrice = appliedPrice;
-        // 10.2 - update the base price
+    // 10.2 - update the base price
     if (basePrice) product.basePrice = basePrice;
-        // 10.3 - update the discount
+    // 10.3 - update the discount
     if (discount) product.discount = discount;
     // 11 - check if the user want to update any image 
     if (oldPublicId) {
         // 11.1 - check if the user upload the new image or not
-        if (!req.file) return next({message: 'Please select new image',cause: 400})
+        if (!req.file) return next({ message: 'Please select new image', cause: 400 })
         // 11.2 - creating the folder path of the product
         const folderPath = product.imgs[0].public_id.split(`${product.folderId}/`)[0]
         // 11.3 - creating the new public_id
@@ -215,57 +217,70 @@ export const updateProduct = async (req, res, next) => {
 */
 export const getAllProducts = async (req, res, next) => {
     // 1 - destructing the page and size from req.query
-    const {page ,size,sort,...query} = req.query;
+    const { page, size, sort, ...query } = req.query;
     // 2 - applying the api features to products
-    const features = new ApiFeaturesProducts(req.query,Product.find())
-    //.pagination({page ,size})
-    // .sort(sort)
-    // .search(query);
-    .filter(query)
+    const features = new ApiFeaturesProducts(req.query, Product.find())
+        //.pagination({page ,size})
+        // .sort(sort)
+        // .search(query);
+        .filter(query)
     const products = await features.mongooseQuery;
-    if(!products) return next({message:'an error occour while fetching the products',cause:500});
+    if (!products) return next({ message: 'an error occour while fetching the products', cause: 500 });
     // 3 - return the response
     return res.status(200).json({
         success: true,
         message: 'Products fetched successfully',
-        data:products
+        data: products
     })
 }
 
 // ====================== get all Products with reviews =================== //
 
-export const getAllProductsWithReviews = async (req,res,next) =>{
+export const getAllProductsWithReviews = async (req, res, next) => {
     // get all products 
     const products = await Product.find().populate([
         {
-            path:'Reviews'
+            path: 'Reviews'
         }
     ]);
 
-    if(!products.length){
-        return next({message:'No Products Found',cause:404});
+    if (!products.length) {
+        return next({ message: 'No Products Found', cause: 404 });
     }
 
     res.status(200).json({
-        success:true,
-        message:'Products Fetched Successfully',
-        data:products
+        success: true,
+        message: 'Products Fetched Successfully',
+        data: products
     })
 }
 
 // ======================== delete product api ========================= //
 /** */
-export const deleteProduct = async (req,res,next) =>{
+export const deleteProduct = async (req, res, next) => {
     // destructing the user id
-    const {_id} = req.authUser;
+    const { _id } = req.authUser;
     // destructing the id of the product 
-    const {productId} = req.params;
+    const { productId } = req.params;
     // find the product and deleting it
-    const deletedProduct = await Product.findByIdAndDelete(productId);
-    if(!deletedProduct){
-        return next({message:'Product Deletion Fail',cause:400});
+    const deletedProduct = await Product.findOneAndDelete({_id:productId,addedBy:_id});
+    if (!deletedProduct) {
+        return next({ message: 'No Product Found', cause: 404 });
     }
-    await cloudinaryConnection().api.delete_resources_by_prefix(`${process.env.MAIN_FOLDER}/Categories/${RelatedCategory.folderId}/SubCategories/${RelatedSubCategory.folderId}/Brands/${deletedBrand.folderId}`);
-        // 7 - delete the brand's folder from cloudinary
-        await cloudinaryConnection().api.delete_folder(`${process.env.MAIN_FOLDER}/Categories/${RelatedCategory.folderId}/SubCategories/${RelatedSubCategory.folderId}/Brands/${deletedBrand.folderId}`);
+    // finding the product's category
+    const category = await Category.findById(deletedProduct.categoryId);
+    // finding the product's sub category
+    const SubCategory = await subCategory.findById(deletedProduct.subCategoryId);
+    // finding the product's brand
+    const brand = await Brand.findById(deletedProduct.brandId);
+    await cloudinaryConnection().api.delete_resources_by_prefix(`${process.env.MAIN_FOLDER}/Categories/${category.folderId}/SubCategories/${SubCategory.folderId}/Brands/${brand.folderId}/Products/${deletedProduct.folderId}`);
+    // delete the brand's folder from cloudinary
+    await cloudinaryConnection().api.delete_folder(`${process.env.MAIN_FOLDER}/Categories/${category.folderId}/SubCategories/${SubCategory.folderId}/Brands/${brand.folderId}/Products/${deletedProduct.folderId}`);
+
+    // return the response 
+    return res.status(200).json({
+        success: true,
+        message: 'Product Deleted Successfully'
+    })
+
 }
