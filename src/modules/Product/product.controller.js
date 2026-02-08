@@ -4,7 +4,7 @@ import slugify from 'slugify';
 import Product from '../../../DB/models/product.model.js';
 import Brand from '../../../DB/models/brand.model.js';
 import Category from '../../../DB/models/category.model.js';
-import subCategory from '../../../DB/models/sub-category.model.js';
+import subCategroyModel from '../../../DB/models/sub-category.model.js';
 import cloudinaryConnection from '../../utils/cloudinary.js';
 import generateUniqueString from '../../utils/Generate-unique-string.js';
 import { ApiFeaturesProducts } from '../../utils/ApiFeatures/api-features-products.js';
@@ -256,31 +256,39 @@ export const getAllProductsWithReviews = async (req, res, next) => {
 }
 
 // ======================== delete product api ========================= //
-/** */
+/*
+    // 1 - destructing the user id
+    // 2 - destructing the id of the product 
+    // 3 - find the product and deleting it
+    // 4 - finding the product's category
+    // 5 - finding the product's sub category
+    // 6 - finding the product's brand
+    // 7 - delete the brand's folder from cloudinary
+    // 8 - return the response 
+*/
 export const deleteProduct = async (req, res, next) => {
-    // destructing the user id
+    // 1 - destructing the user id
     const { _id } = req.authUser;
-    // destructing the id of the product 
-    const { productId } = req.params;
-    // find the product and deleting it
+    // 2 - destructing the id of the product 
+    const { productId } = req.body;
+    // 3 - find the product and deleting it
     const deletedProduct = await Product.findOneAndDelete({_id:productId,addedBy:_id});
     if (!deletedProduct) {
         return next({ message: 'No Product Found', cause: 404 });
     }
-    // finding the product's category
+    // 4 - finding the product's category
     const category = await Category.findById(deletedProduct.categoryId);
-    // finding the product's sub category
-    const SubCategory = await subCategory.findById(deletedProduct.subCategoryId);
-    // finding the product's brand
+    // 5 - finding the product's sub category
+    const SubCategory = await subCategroyModel.findById(deletedProduct.subCategoryId);
+    // 6 - finding the product's brand
     const brand = await Brand.findById(deletedProduct.brandId);
     await cloudinaryConnection().api.delete_resources_by_prefix(`${process.env.MAIN_FOLDER}/Categories/${category.folderId}/SubCategories/${SubCategory.folderId}/Brands/${brand.folderId}/Products/${deletedProduct.folderId}`);
-    // delete the brand's folder from cloudinary
+    // 7 - delete the brand's folder from cloudinary
     await cloudinaryConnection().api.delete_folder(`${process.env.MAIN_FOLDER}/Categories/${category.folderId}/SubCategories/${SubCategory.folderId}/Brands/${brand.folderId}/Products/${deletedProduct.folderId}`);
 
-    // return the response 
+    // 8 - return the response 
     return res.status(200).json({
         success: true,
         message: 'Product Deleted Successfully'
     })
-
 }

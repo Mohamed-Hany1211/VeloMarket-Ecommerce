@@ -24,6 +24,6 @@ router.put('/updateProduct/:productId',
 router.get('/getAllProducts',validationMiddleware(validator.getAllProductsWithApiFeaturesSchema),expressAsyncHandler(productController.getAllProducts));
 router.get('/getAllProductsWithReviews',expressAsyncHandler(productController.getAllProductsWithReviews));
 
-router.delete('/deleteProduct/:productId',auth(endPointsRoles.DELETE_PRODUCT),validationMiddleware(validator.deleteProductSchema),expressAsyncHandler(productController.deleteProduct));
+router.delete('/deleteProduct',auth(endPointsRoles.DELETE_PRODUCT),validationMiddleware(validator.deleteProductSchema),expressAsyncHandler(productController.deleteProduct));
 
 export default router;

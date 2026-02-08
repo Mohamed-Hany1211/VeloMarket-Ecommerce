@@ -3,7 +3,7 @@ import expressAsyncHandler from "express-async-handler";
 import * as reviewController from './review.controller.js'
 import {auth} from '../../middlewares/auth.middleware.js';
 import {validationMiddleware} from '../../middlewares/validation.middleware.js';
-import {addReviewSchema} from './review.validationSchemas.js'
+import * as validator from './review.validationSchemas.js';
 import {reviewApiesRules} from './review.endPoints.js';
 const router = Router();
 
@@ -13,13 +13,13 @@ const router = Router();
 router.post(
     '/addReview',
     auth(reviewApiesRules.ADD_REVIEW),
-    validationMiddleware(addReviewSchema),
+    validationMiddleware(validator.addReviewSchema),
     expressAsyncHandler(reviewController.addReview)
 );
 
-router.delete('/deleteReview/:reviewId',auth(reviewApiesRules.ADD_REVIEW),expressAsyncHandler(reviewController.deleteReview));
+router.delete('/deleteReview/:reviewId',auth(reviewApiesRules.ADD_REVIEW),validationMiddleware(validator.deleteReviewSchema),expressAsyncHandler(reviewController.deleteReview));
 
-router.get('/getAllReviewsForSpecificProduct',expressAsyncHandler(reviewController.getAllReviewsForSpecificProduct));
+router.get('/getAllReviewsForSpecificProduct',validationMiddleware(validator.getAllReviewsForSpecificProductSchema),expressAsyncHandler(reviewController.getAllReviewsForSpecificProduct));
 
 
 

@@ -51,7 +51,7 @@ export const getAllProductsWithApiFeaturesSchema = {
 
 // delete product validation schema
 export const deleteProductSchema = {
-    params:Joi.object({
+    body:Joi.object({
         productId:generalValidationRule.dbId.required()
     })
 }
