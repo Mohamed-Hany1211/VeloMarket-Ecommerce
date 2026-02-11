@@ -100,7 +100,7 @@ export const addSubCategory = async (req, res, next) => {
 */
 export const deleteSubCategory = async (req, res, next) => {
     // 1 - destructing the sub category id and the category id of the category which this subcategory is belonging to
-    const { subCategoryId, categoryId } = req.params;
+    const { subCategoryId, categoryId } = req.body;
     // 2 - find the category 
     const category = await Category.findById(categoryId);
     // 3 - delete the subCategroy

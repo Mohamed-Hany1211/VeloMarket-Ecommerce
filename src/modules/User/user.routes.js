@@ -13,9 +13,9 @@ const router = Router();
 
 
 router.put('/updateUser',validationMiddleware(userValidationSchemas.updateUserSchema),auth(endPointRoles.USER),asyncHandler(userController.updateUser));
-router.delete('/deleteUserProfile',auth(endPointRoles.USER),asyncHandler(userController.deleteUserProfile));
-router.get('/getUserProfile',auth(endPointRoles.USER),asyncHandler(userController.getUserProfile));
-router.patch('/userProfileSoftDeletion',auth(endPointRoles.USER),asyncHandler(userController.userProfileSoftDeletion));
+router.delete('/deleteUserProfile',auth(endPointRoles.USER),validationMiddleware(userValidationSchemas.deleteUserProfile),asyncHandler(userController.deleteUserProfile));
+router.get('/getUserProfile',auth(endPointRoles.USER),validationMiddleware(userValidationSchemas.getUserProfile),asyncHandler(userController.getUserProfile));
+router.patch('/userProfileSoftDeletion',auth(endPointRoles.USER),validationMiddleware(userValidationSchemas.userProfileSoftDeletion),asyncHandler(userController.userProfileSoftDeletion));
 router.patch('/updatePassword',validationMiddleware(userValidationSchemas.updatePassword),auth(endPointRoles.USER),asyncHandler(userController.updatePassword));
 
 

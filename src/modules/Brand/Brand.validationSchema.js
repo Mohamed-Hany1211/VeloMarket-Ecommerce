@@ -11,6 +11,9 @@ export const addBrand = {
     query: Joi.object({
         categoryId: generalValidationRule.dbId.required(),
         subCategoryId: generalValidationRule.dbId.required()
+    }),
+    authUser: Joi.object({
+        _id: generalValidationRule.dbId.required()
     })
 }
 
@@ -33,13 +36,16 @@ export const updateBrand = {
     }),
     query: Joi.object({
         brandId: generalValidationRule.dbId.required()
+    }),
+    authUser: Joi.object({
+        _id: generalValidationRule.dbId.required()
     })
 }
 
 
 export const getAllBrandsWithApiFeatures = {
-    query:Joi.object({
-        page:Joi.number(),
-        size:Joi.number()
+    query: Joi.object({
+        page: Joi.number(),
+        size: Joi.number()
     })
 }

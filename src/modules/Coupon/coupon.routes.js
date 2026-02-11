@@ -16,7 +16,7 @@ router.get('/getCouponById/:copunId',validationMiddleware(validator.getCouponByI
 router.get('/getAllCouponsWithApiFeatures',validationMiddleware(validator.getAllCouponsWithApiFeaturesSchema),expressAsyncHandler(couponController.getAllCouponsWithApiFeatures));
 router.get('/getAllDisabledCoupons',expressAsyncHandler(couponController.getAllDisabledCoupons));
 router.get('/getAllEnabledCoupons',expressAsyncHandler(couponController.getAllEnabledCoupons));
-router.patch('/disableAndEnableCoupon/:couponId',auth(endpointsRoles.ADD_COUPON),validationMiddleware(validator.getCouponByIdSchema),expressAsyncHandler(couponController.disableAndEnableCoupon));
+router.patch('/disableAndEnableCoupon/:couponId',auth(endpointsRoles.ADD_COUPON),validationMiddleware(validator.disableAndEnableCoupon),expressAsyncHandler(couponController.disableAndEnableCoupon));
 router.put('/updateCoupon/:couponId',auth(endpointsRoles.ADD_COUPON),validationMiddleware(validator.updateCouponSchema),expressAsyncHandler(couponController.updateCoupon));
 
 
